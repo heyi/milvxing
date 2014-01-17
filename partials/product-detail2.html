@@ -1,0 +1,312 @@
+<div class="page {{slide}} {{slide2}} {{slide3}} {{slide4}} {{slide5}} {{slide6}}">
+  <div class="header">
+    <span class="mask"></span>
+    <div class='title'>
+      <a href="#products">
+        <i class="fa fa-angle-left left" ></i>
+      </a>
+      <span>产品详情</span>
+      <span class="right" ng-click='show = !show' style="font-size:1.7em; color:#fff;  ">+</span>
+    </div> 
+  </div>
+
+  <div id="btn-share" ng-class='{show:show}'>
+    <a href="tel:4006664066"> <i class="social-share-button-phone"></i> </a>
+    <i class="social-share-button-qq" ng-click='share("qq")'></i>
+    <i class="social-share-button-tqq" ng-click='share("tqq")'></i>
+    <i class="social-share-button-weibo" ng-click='share("weibo")'></i>
+    <i class="social-share-button-douban" ng-click='share("douban")'></i>
+  </div>
+
+  <div  ng-show='ad' class="ad" style="position:fixed; top:58px;opacity:.8; z-index:999; ">
+    <table cellspacing="0">
+      <tr>
+        <td>
+          <b class='orange' style="font-size:2em; line-height:1;  ">{{product.price}}</b>  
+          <b class='orange mr-5'>元</b>
+        </td>
+        <td>
+          <span class="gray" style='text-decoration: line-through;'>{{product.market_price}}元</span>  
+        </td>
+        <td>
+          <button type="button" ng-click="toCalendar()" ng-disabled='product.diff_time == 0' class="btn big">立即抢购</button>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div id="product-detail" class="main-content" >
+    <my-iscroll show-ad='1'>
+
+    <ul rn-carousel rn-carousel-buffered class="image" rn-carousel-indicator>
+      <li ng-repeat="image in product.img_list">
+        <img ng-src="{{image}}" alt="product" />
+      </li>
+    </ul>
+
+    <div id="_ad" class='ad'>
+      <table cellspacing="0">
+        <tr>
+          <td>
+            <b class='orange' style="font-size:2em; line-height:1;  ">{{product.price}}</b>  
+            <b class='orange mr-5'>元</b>
+          </td>
+          <td>
+            <span class="gray" style='text-decoration: line-through;'>{{product.market_price}}元</span>  
+          </td>
+          <td>
+            <button type="button" ng-click="$parent.toCalendar()" ng-disabled='product.diff_time == 0'  class="btn big">立即抢购</button>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="content" style="padding: 0% 0%; ">
+      <div class="pin" style="margin-top:0px; ">
+        <div class="pin-header light-blue ad" style="display:table; ">
+          <span class="cell3" style="font-size:1.5em; ">
+            {{product.start}} - {{product.end}}
+          </span>
+          <span class="fs-1 fw-n black">
+            {{product.way_type}}
+          </span>
+        </div>
+        <div class="pin-header" style="line-height: 1.4em; padding-left:3%; height:auto;display:table; " >
+          <div class="ad-content" style="padding: 10px 10px 10px 0px;  ">
+            {{product.pro_name}}
+          </div>
+        </div>
+
+        <div class="pin" style="padding:0 3%; " >
+          <table cellspacing="0" class="content" style="height:50px; ">
+            <tr>
+              <td style="width:40%; ">
+                <i class="fa-sort-amount-desc fa light-blue mr-5 "></i>
+                剩余 <span class='orange'>{{product.pro_store}}  </span> 位
+              </td>
+              <td>
+                <i class="fa-clock-o fa light-blue mr-5 " style="font-size:1.2em; "></i>
+                <span count-down end-time={{product.diff_time}} > </span>
+              </td>
+            </tr>
+          </table>
+          <div class="row">
+            <div class="col-xs-5" >
+              <span>
+              </span>
+            </div>
+            <div class="col-xs-7"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="pin" style="padding:0 3%;  " ng-click="$parent.toCalendar()">
+        <table cellspacing="0" class='content'>
+          <tr>
+            <td style="width:10%; ">
+              <span  class="fa-stack light-blue" style="font-size:13px;">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-calendar fa-stack-1x fa-inverse"></i>
+              </span>
+            </td>
+            <td style="width:25%; ">
+              <b class="mr-5" style="font-size:1em;">出发日期</b>
+            </td>
+            <td style="width:60%; ">
+              <div class="content" ng-bind='product.set_out_date'> </div>
+            </td>
+            <td style="width: 5%; ">
+              <i class="fa-angle-right fa  pull-right" style="line-height: 50px; color:#a0a0a0;font-size:1.5em;  "></i> 
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <my-pin title='产品推荐' icon= 'heart' ng-click="$parent.slide6='slide-left';">
+      <div ng-bind-html='product.sub_special | unsafe'></div>
+      </my-pin>
+
+      <my-pin ng-show='product.way_type !== "跟团游"' title='酒店交通' icon='compass' ng-click="$parent.slide2='slide-left';" >
+      <p>去程:  {{product.hotel_traffic.to}}</p>
+      <p>返程:  {{product.hotel_traffic.back}}</p>
+      <p>酒店名称:  {{product.hotel_traffic.hotel_name}}</p>
+      <p>{{product.hotel_traffic.sub_hotel_info}}</p>
+      </my-pin>
+
+      <my-pin title='详细行程' icon='stack-exchange' ng-click="$parent.slide='slide-left';" >
+      <div ng-bind-html='product.sub_journey | unsafe'></div>
+      </my-pin>
+
+      <my-pin title='费用说明' icon='money' ng-click="$parent.slide3='slide-left';"  >
+      <div ng-bind-html='product.sub_cost_info | unsafe'></div>
+      </my-pin>
+
+      <my-pin title='签证信息' icon='credit-card' ng-click="$parent.slide4='slide-left';">
+      <div ng-bind-html='product.sub_visa_info | unsafe'></div>
+      </my-pin>
+
+      <my-pin title='预订须知' icon='exclamation' ng-click="$parent.slide5='slide-left';" >
+      <div ng-bind-html='product.sub_important_info | unsafe'></div>
+      </my-pin>
+
+      <my-pin title='相关产品推荐' icon='star' >
+      <div class="item" ng-repeat='a in product.about_product' style='line-height:1.2; padding-left:0px;
+        padding-right:0px; '>
+        <table cellspacing="0">
+          <tr>
+            <td style="width: 97%; ">
+              <a href='#products/{{a.pro_id}}'>
+                ￥<span class='orange'>{{a.price}}</span> {{a.pro_name}}  
+              </a>
+            </td>
+            <td style="widht:3; ">
+              <a href='#products/{{a.pro_id}}'> <i class="fa fa-angle-right " style="color:#a0a0a0;font-size:1.5em; "></i> </a>
+            </td>
+          </tr>
+        </table>
+      </div>
+      </my-pin>
+    </div>
+    </my-iscroll>
+  </div>
+</div>
+
+<div class="page2 {{slide}}" ng-swipe-right='slide=""'>
+
+  <div class="header">
+    <span class="mask"></span>
+    <div class='title'>
+      <i class="fa fa-angle-left left" ng-click="slide=''" ></i>
+      <span>详细行程</span>
+      <a href="#products">
+        <i class="fa fa-home right"></i>
+      </a>
+    </div> 
+  </div>
+
+  <div class="main-content">
+    <my-iscroll>
+    <div class="pin pd-10">
+      <h5 class='light-blue'>参考行程</h5>
+      <div ng-repeat='p in product.journey'>
+        <h5 ng-bind='p.day'></h5>
+        <img ng-show='p.img' ng-src="{{p.img}}" alt="{{p.day}}" />
+        <div ng-bind-html='p.triffic_info | unsafe'></div>
+        <div class="orange" ng-bind-html='p.hotel_dining | unsafe'></div>
+      </div>
+    </div>
+    </my-iscroll>
+  </div>
+
+</div>
+
+<div class="page3 {{slide2}}" ng-swipe-right='slide2=""'>
+  <div class="header">
+    <span class="mask"></span>
+    <div class='title'>
+      <i class="fa fa-angle-left left" ng-click="slide2=''" ></i>
+      <span>酒店交通</span>
+      <a href="#products">
+        <i class="fa fa-home right"></i>
+      </a>
+    </div> 
+  </div>
+
+  <div class="main-content" >
+    <my-iscroll>
+    <div class="pin pd-10">
+      <h5 class='light-blue'>交通信息</h5>
+      <p>去程:  {{product.hotel_traffic.to}}</p>
+      <p>返程:  {{product.hotel_traffic.back}}</p>
+      <h5 class='light-blue'>酒店信息</h5>
+      <p>酒店名称:  {{product.hotel_traffic.hotel_name}}</p>
+      <div ng-bind-html='product.hotel_traffic.hotel_info | unsafe'></div>
+    </div>
+    </my-iscroll>
+  </div>
+</div>
+
+<div class="page4 {{slide3}}" ng-swipe-right='slide3=""'>
+  <div class="header">
+    <span class="mask"></span>
+    <div class='title'>
+      <i class="fa fa-angle-left left" ng-click="slide3=''" ></i>
+      <span>费用说明</span>
+      <a href="#products">
+        <i class="fa fa-home right"></i>
+      </a>
+    </div> 
+  </div>
+  <div class="main-content">
+    <my-iscroll>
+    <div class="pin pd-10">
+      <h5 class='light-blue'>费用包含</h5>
+      <div ng-bind-html='product.contains | unsafe'></div>
+      <h5 class='light-blue'>费用不含</h5>
+      <div ng-bind-html='product.not_contains | unsafe'></div>
+    </div>
+    </my-iscroll>
+  </div>
+</div>
+
+<div class="page5 {{slide4}}" ng-swipe-right='slide4=""'>
+  <div class="header">
+    <span class="mask"></span>
+    <div class='title'>
+      <i class="fa fa-angle-left left" ng-click="slide4=''" ></i>
+      <span>签证信息</span>
+      <a href="#products">
+        <i class="fa fa-home right"></i>
+      </a>
+    </div> 
+  </div>
+  <div class="main-content">
+    <my-iscroll>
+    <div class="pin pd-10">
+      <div ng-bind-html='product.visa_info | unsafe'></div>
+    </div>
+    </my-iscroll>
+  </div>
+</div>
+
+<div class="page6 {{slide5}}" ng-swipe-right='slide5=""'>
+  <div class="header">
+    <span class="mask"></span>
+    <div class='title'>
+      <i class="fa fa-angle-left left" ng-click="slide5=''" ></i>
+      <span>预订须知</span>
+      <a href="#products">
+        <i class="fa fa-home right"></i>
+      </a>
+    </div> 
+  </div>
+  <div class="main-content">
+    <my-iscroll>
+    <div class="pin pd-10">
+      <h5 ng-show='product.important_tips.length !== 0' class="light-blue">重要提示</h5>
+      <div ng-bind-html='product.important_tips | unsafe'></div>
+      <h5 class="light-blue">友情提示</h5>
+      <div ng-bind-html='product.friendly_tips | unsafe'></div>
+    </div>
+    </my-iscroll>
+  </div>
+</div>
+
+<div class="page7 {{slide6}}" ng-swipe-right='slide6=""'>
+  <div class="header">
+    <span class="mask"></span>
+    <div class='title'>
+      <i class="fa fa-angle-left left" ng-click="slide6=''" ></i>
+      <span>产品推荐</span>
+      <a href="#products">
+        <i class="fa fa-home right" ></i>
+      </a>
+    </div> 
+  </div>
+  <div class="main-content">
+    <my-iscroll>
+    <div class="pin pd-10">
+      <div ng-bind-html='product.special | unsafe'></div>
+    </div>
+    </my-iscroll>
+  </div>
+</div>

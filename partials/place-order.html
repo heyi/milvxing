@@ -1,0 +1,210 @@
+<div class="header">
+  <span class="mask"></span>
+  <div class='title'>
+    <i class="fa fa-angle-left left" my-back ></i>
+    订单填写
+    <a href="#products">
+      <i class="fa fa-home right" ></i>
+    </a>
+  </div> 
+</div>
+
+
+<div id="place-order" class="main-content" >
+  <my-iscroll>
+  <h4 style="text-align:left;padding-left:10px; " ng-bind="order.product.pro_name"></h4>
+  <form novalidate  name='form'>
+    <div class='pin' >
+      <div class='item'>
+        <b class='light-blue'>产品信息</b>
+      </div>
+      <div class='item' >
+        <div class="cell1"> 出发日期 </div>
+        <div class="cell2">
+          {{order.product.set_out_date}}
+          <a href="#calendar?id={{order.pro_id}}">
+            <i class='fa-angle-right fa pull-right mr-5 ' style="color:#a0a0a0; font-size:1.5em;"></i>
+          </a>
+        </div>
+      </div>
+      <div class='item'>
+        <span class="cell1"> 价格 </span>
+        <span class="cell2 orange">￥ {{order.product.trip_price * order.adult_num + order.product.kid_price *
+          order.child_num + order.flatshare * ((order.room_num * 2 - order.adult_num) * order.product.diff_room_price)  }} </span>
+      </div>
+      <div class="item">
+        <table cellspacing="0" style="width:100%; padding:6px 5px;  ">
+          <tr>
+            <td>
+              成人
+            </td>
+            <td>
+              <table class='number-input' cellspacing="0">
+                <tr>
+                  <td>
+                    <i class="fa-minus-square fa light-blue " ng-click='adjustMan(-1, true)'></i>
+                  </td>
+                  <td>
+                    <input type="number" class="" ng-model="order.adult_num" name="adult_num"
+                    min="{{order.product.least}}" max="{{order.product.most}}" integer />
+                  </td>
+                  <td>
+                    <i class="fa-plus-square fa light-blue" ng-click='adjustMan(1, true)'></i>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              成人 &gt 12岁
+            </td>
+          </tr>
+        </table>
+      </div>
+      <div class="item" ng-show='order.product.is_kid'>
+        <table cellspacing="0" style="width:100%; padding:6px 5px;  ">
+          <tr>
+            <td>
+             儿童 
+            </td>
+            <td>
+              <table class='number-input' cellspacing="0">
+                <tr>
+                  <td>
+                    <i class="fa-plus-square fa light-blue" ng-click='adjustMan(-1, false)'></i>
+                  </td>
+                  <td>
+                    <input type="number" class="" ng-model="order.child_num" name="child_num" min="0" max="99" integer />
+                  </td>
+                  <td>
+                    <i class="fa-plus-square fa light-blue" ng-click='adjustMan(1, false)'></i>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td>
+              儿童  <=  12岁
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="item">
+        <table cellspacing="0" style="width:100%; padding:6px 5px;  ">
+          <tr>
+            <td>
+              房间数 
+            </td>
+            <td>
+              <table class='number-input' cellspacing="0">
+                <tr>
+                  <td>
+                    <i ng-click='adjustRoom(-1)' class="fa-minus-square fa light-blue "></i> 
+                  </td>
+                  <td>
+                    <input type="number" class="" ng-model="order.room_num" name="room_num"
+                    min="{{order.adult_num/2 }}" max={{order.adult_num}} integer />
+                  </td>
+                  <td>
+                    <i ng-click='adjustRoom(1)' class="fa-plus-square fa light-blue"></i>
+                  </td>
+                </tr>
+              </table>
+            </td>
+            <td></td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="item">
+        <table cellspacing="0">
+          <tr>
+            <td>是否同意拼房 </td>
+            <td style="text-align:right; "> <input type="checkbox" ng-true-value="0" ng-false-value="1"  ng-model="order.flatshare" /> </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="item">
+        <table cellspacing="0">
+          <tr>
+            <td>单房差</td>
+            <td ng-bind='(order.room_num * 2 - order.adult_num) * order.flatshare ' ></td>
+            <td class = 'orange' >
+               ￥{{(order.room_num * 2 - order.adult_num) * order.flatshare * order.product.diff_room_price}}
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+
+    <div class="pin" ng-repeat="p in order.passenger">
+      <div class="item light-blue">
+        <b > {{p.is_adult ? "成人" : "儿童"}} {{$index + 1}}</b>
+      </div>
+      <div class="item2">
+        <div class="cell1">姓名</div>
+        <div class="cell2">
+          <input type="text" class='form-control big' ng-model='order.passenger[$index].user_name'
+          placeholder='必填' required/>
+        </div>
+      </div>
+      <div class="item2">
+        <div class="cell1">证件类型</div>
+        <div class="cell2">
+          <select required ng-model='order.passenger[$index].card_type' class='form-control big'>
+            <option value="护照">护照</option>
+            <option value="身份证">身份证</option>
+            <option value="军人证">军人证</option>
+            <option value="港澳通行证">港澳通行证</option>
+          </select>
+        </div>
+      </div>
+      <div class="item2">
+        <div class="cell1">证件号码</div>
+        <div class="cell2">
+          <input type="text" class='form-control big' ng-model='order.passenger[$index].card_num' placeholder='必填' required/>
+        </div>
+      </div>
+    </div>
+    
+    <div class="pin">
+      <div class="item light-blue">
+        <b> 联系人信息 </b>
+      </div>
+      <div class="item2">
+        <span class="cell1"> 姓名 </span>
+        <span class="cell2">
+          <input type="text" class='form-control big' ng-model='order.contact.name' name="name" placeholder='必填' required/>
+        </span>
+      </div>
+      <div class="item2">
+        <span class="cell1"> 手机号码 </span>
+        <span class="cell2">
+          <input type="text" class='form-control big' ng-model='order.contact.phone' name="phone"
+          placeholder='必填' ng-pattern='/^1\d{10}$/'  required/>
+        </span>
+      </div>
+      <span class="orange" ng-show="form.phone.$error.pattern">手机号格式不对!</span>
+      <div class="item2">
+        <span class="cell1"> 电子邮箱 </span>
+        <span class="cell2">
+          <input type="email" class='form-control big' ng-model='order.contact.email' name="email"
+          placeholder='邮箱' />
+        </span>
+      </div>
+      <span class="orange" ng-show="form.email.$error.email">邮箱格式不对!</span>
+      <div class="item2">
+        <span class="cell1"> 订单留言 </span>
+        <span class="cell2">
+          <input type="text" class='form-control big' ng-model='order.contact.message' name="message"
+          placeholder="有任何要求请在这里留言"  />
+        </span>
+      </div>
+    </div>
+    <span class="orange" ng-show="!status" ng-bind='msg'> </span>
+    <button type="button" ng-click='submit_order()' ng-disabled='!form.$valid'  class="btn big" style="width:96%;
+      margin:auto; margin-bottom:8%;">提交订单</button>
+
+  </form>
+  </my-iscroll>
+</div>

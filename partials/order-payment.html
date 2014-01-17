@@ -1,0 +1,65 @@
+<div class="header">
+  <span class="mask"></span>
+  <div class='title'>
+    <i class="fa fa-angle-left left " my-back ></i>
+    在线支付 
+    <a href="#products">
+      <i class="fa fa-home right" ></i>
+    </a>
+  </div> 
+</div>
+
+<div id="order-success" class="main-content" >
+  <my-iscroll>
+  <my-pin title='订单信息' >
+     <table class="content" cellspacing="0">
+       <tr>
+         <td>订单号:</td>
+         <td class='orange' ng-bind='order.order_num'> </td>
+       </tr>
+       <tr>
+         <td>应付金额:</td>
+         <td class='orange'>
+           ￥{{order.total_price}}
+         </td>
+       </tr>
+       <tr>
+         <td>下单时间:</td>
+         <td class='orange' ng-bind="order.add_time"></td>
+       </tr>
+       <tr>
+         <td>订单联系人:</td>
+         <td class='orange' ng-bind="order.contact_name"></td>
+       </tr>
+       <tr>
+         <td>手机号码:</td>
+         <td class='orange' ng-bind="order.contact_phone"></td>
+       </tr>
+       <tr>
+         <td>出团日期:</td>
+         <td class='orange' ng-bind="order.set_out_time" ></td>
+       </tr>
+     </table>
+     <p style='border-top: 1px dashed #dcdcdc; padding-top:5%; color:#a0a0a0;  '>
+       本产品价格, 团期等信息需我们为您核实.核实有位后, 您可以继续对订单进行支付操作,
+       在您完成付款签约后, 即可出游.
+     </p>
+  </my-pin>
+
+  <form id='order_form' name='form' method="post">
+    <my-pin title='选择支付方式' >
+    <div class="item">
+      <div class="cell2"> 信用卡 (单笔10000元) </div>
+      <div class="cell1" style="text-align:center; "> <input type="radio" name="bank" value="ALIPAY" checked /> </div>
+    </div>
+
+    <div class="item" style="border:none; ">
+      <div class="cell2"> 借记卡 </div>
+      <div class="cell1" style="text-align:center; "> <input type="radio" name="bank" value="ALIPAY" /> </div>
+    </div>
+    </my-pin>
+    <!-- <a id="to-pay" href="{{url}}" target="_blank"></a>-->
+    <button   ng-mousedown="submit_order()" class="btn big" style="width:98%; margin:auto; margin-bottom:5%;">提交</button>
+  </form>
+  </my-iscroll>
+</div>

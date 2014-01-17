@@ -1,0 +1,71 @@
+<div class="header">
+  <span class="mask"></span>
+  <div class='title'>
+    <i class="fa fa-angle-left left" my-back ></i>
+    订单详情
+    <a href="#products">
+      <i class="fa fa-home right" ></i>
+    </a>
+  </div> 
+</div>
+
+<div class="main-content">
+  <my-iscroll >
+  <my-pin title='产品信息'>
+  <p ng-bind='order.pro_name'> </p>
+  <p>{{order.start}} <span ng-repeat='s in order.end'>-{{s.place_name}}</span></p>
+  <p>{{order.set_out_time}}出发  成人:{{order.adults}}人  儿童:{{order.kids}}</p>
+  <table cellspacing="0" class="pin-table">
+    <tr>
+      <td>
+        <p>
+          实付金额: <span class="orange">¥{{order.total_price}}元</span>
+        </p>
+        <p class="red"> {{order.order_state_name}} </p>
+      </td>
+      <td>
+        <a ng-show='order.order_state  == 2'
+          href="#order-payment?order_id={{order.order_id}}" class="btn big">去付款</a> </td>
+    </tr>
+  </table>
+  </my-pin>
+
+  <my-pin title='客服信息'>
+  <table cellspacing="0" class="pin-table">
+    <tr>
+      <td>姓名:</td>
+      <td ng-bind='admin.nickname'></td>
+      <td>手机号码:</td>
+      <td ng-bind='admin.tel'></td>
+    </tr>
+  </table>
+  </my-pin>
+
+  <my-pin title='联系人信息'>
+  <table cellspacing="0" class="pin-table">
+    <tr>
+      <td>姓名:</td>
+      <td ng-bind='order.contact_name'></td>
+      <td>手机号码:</td>
+      <td ng-bind='order.contact_phone'></td>
+    </tr>
+    <tr>
+      <td>邮箱:</td>
+      <td colspan=3 ng-bind='order.contact_email'>
+      </td>
+    </tr>
+  </table>
+  </my-pin>
+
+
+  <my-pin title='旅客信息'>
+  <table cellspacing="0" class="pin-table">
+    <tr ng-repeat='u in user_info'>
+      <td ng-bind='u.user_name'></td>
+      <td ng-bind='u.card_type'></td>
+      <td ng-bind='u.card_num'></td>
+    </tr>
+  </table>
+  </my-pin>
+  </my-iscroll >
+</div>

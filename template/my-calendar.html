@@ -1,0 +1,22 @@
+<div class="calendar" ng-swipe-left='_prevMonth()' ng-swipe-right='_nextMonth()' >
+  <div class="calendar-header ">
+    <i ng-click='_prevMonth()' class="fa-caret-left  light-blue  fa"></i>
+    <div class="cell"> {{day.clone().toString('yyyy')}}年<span class="light-blue">{{day.clone().toString('MM')}}</span>月 </div>
+    <i ng-click='_nextMonth()' class="fa-caret-right  light-blue   fa"></i>
+  </div>
+  <table  style='width: 100%;'>
+    <thead>
+      <tr>
+        <th>周日</th>
+        <th>周一</th>
+        <th>周二</th>
+        <th>周三</th>
+        <th>周四</th>
+        <th>周五</th>
+        <th>周六</th>
+      </tr>
+    </thead>
+    <tbody>
+    </tbody>
+  </table>
+</div>

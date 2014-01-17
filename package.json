@@ -1,0 +1,21 @@
+{
+  "name": "ilvxing",
+  "description": "爱旅行 web app",
+  "homepage": "http://www.ilvxing.com",
+  "author": "xiongzhijian heyi.tk@gmail.com",
+  "version": "0.1.0",
+  "engines": {
+    "node": ">= 0.8"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.2",
+    "grunt-contrib-concat": "*",
+    "grunt-contrib-jshint": "*",
+    "grunt-contrib-uglify": "*",
+    "grunt-contrib-connect": "*",
+    "grunt-contrib-cssmin": "~0.6.0",
+    "grunt-release": "~0.3.3",
+    "grunt-contrib-watch": "~0.4.4",
+    "grunt-uncss": "~0.1.5"
+  }
+}

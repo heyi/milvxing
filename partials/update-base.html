@@ -1,0 +1,73 @@
+<div class="header">
+  <span class="mask"></span>
+  <div class='title'>
+    <a href="#personal">
+      <i class="fa-angle-left left fa"></i>
+    </a>
+    基本信息
+    <a href="#products">
+      <i class="fa-home right fa"></i>
+    </a>
+  </div> 
+</div>
+
+<div id="update-base" class="main-content">
+  <my-iscroll>
+  <form name="form" >
+    <div class="content">
+      <div class="item">
+        <div class="cell1"> 手机 </div>
+        <div class="cell2">
+          <input type="text" ng-model='user.phone' name="phone" class="form-control big" placeholder="请输入你的手机号码" ng-pattern='/^1\d{10}$/' required >
+        </div>
+      </div>
+      <span class="orange" ng-show="form.phone.$error.pattern"> 手机号码格式不对!</span>
+      <div class="item">
+        <div class="cell1"> 邮箱 </div>
+        <div class="cell2">
+          <input type="email" ng-model='user.email' name="email" class="form-control big" placeholder="请输入你的邮箱地址" >
+        </div>
+      </div>
+      <span class="orange" ng-show="form.input.$error.email">邮箱地址格式不对!</span>
+      <div class="item">
+        <div class="cell1"> 原密码 </div>
+        <div class="cell2">
+          <input type="password" ng-model='user.oldpwd' name="oldpwd" class="form-control big" placeholder="请输入你的原始密码" >
+        </div>
+      </div>
+      <div class="item">
+        <div class="cell1">新密码</div>
+        <div class="cell2">
+          <input type="password" ng-model='user.newpwd' name="newpwd" class="form-control big" placeholder="请输入你的新密码" >
+        </div>
+      </div>
+      <div class="item">
+        <div class="cell1">确认密码</div>
+        <div class="cell2">
+          <input type="password" ng-model='user.confirmpwd' name="confirmpwd" class="form-control big"
+          placeholder="请重新输入密码" >
+        </div>
+      </div>
+      <span class="orange" ng-show='user.confirmpwd !== user.newpwd'>两次密码不一致!</span>
+      <span class="orange" ng-show="form.input.$error.email">邮箱地址格式不对!</span>
+      <div class="item">
+        <div class="cell1">昵称</div>
+        <div class="cell2">
+          <input type="text" ng-model='user.nickname' name="nickname" class="form-control big" placeholder="请输入你的昵称" required >
+        </div>
+      </div>
+      <div class="item" style="min-height:55px; ">
+        <div class="cell1"> 性别 </div>
+        <div class="cell2">
+          <input type="radio" ng-model="user.sex" value="1" > 男 &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;   
+          <input type="radio" ng-model="user.sex" value="2"> 女
+        </div>
+      </div>
+      <span class="orange" ng-show="!status" ng-bind='msg'> </span>
+    </div>
+    <button type="button" ng-click="update()" ng-disabled='!form.$valid' class="btn big" style="width:95%;
+      margin-top:5%; margin-bottom:10%; margin-left:2.5%;  ">保存</button>
+  </form>
+  </my-iscroll>
+</div>
+

@@ -1,0 +1,8 @@
+<div class="collapse">
+	<div class="collapse-header">
+		{{title}}
+		<i ng-init='show=false' ng-click='show = !show'  class=" fa-{{show?'minus':'plus'}}-circle fa "></i>
+	</div>
+	<div ng-show='show' class="collapse-content" ng-transclude>
+	</div>
+</div>

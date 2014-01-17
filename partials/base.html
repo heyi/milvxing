@@ -1,0 +1,37 @@
+<div class="header">
+  <span class="mask"></span>
+  <div class='title'>
+    <a href="#personal">
+      <i class="fa-angle-left left fa"></i>
+    </a>
+    基本信息
+    <a href="#products">
+      <i class="fa-home right fa"></i>
+    </a>
+  </div> 
+</div>
+
+<div style="background:#fff; ">
+  <div class="item">
+    <div class="cell1"> 手机 </div>
+    <div class="cell2" ng-bind='user.phone'> </div>
+  </div>
+  <div class="item">
+    <div class="cell1"> 邮箱 </div>
+    <div class="cell2" ng-bind='user.email'></div>
+  </div>
+  <div class="item">
+    <div class="cell1"> 密码 </div>
+    <div class="cell2" >******</div>
+  </div>
+  <div class="item">
+    <div class="cell1">昵称</div>
+    <div class="cell2" ng-bind='user.nickname'></div>
+  </div>
+  <div class="item">
+    <div class="cell1"> 性别 </div>
+    <div class="cell2"  ng-bind='user.sex  == 1 ? "男" : (user.sex == 2 ? "女" :"未设置")'></div>
+  </div>
+</div>
+<a href='#updateBase'   class="btn  big" style="width:95%;  margin-left:2.5%; margin-top:5%; ">修改资料</a>
+

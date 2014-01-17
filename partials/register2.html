@@ -1,0 +1,17 @@
+<div class="header">
+  <span class="mask"></span>
+  <div class='title'>
+    <i class="fa-angle-left left fa" my-back></i>
+    快速注册
+  </div> 
+</div>
+
+<form style="padding:3%" name="form" >
+  <div style="background:#fff;">
+    <input type="text" ng-model='user.pwd' name="pwd" class="form-control big" placeholder="请输入你手机获取的验证码" ng-pattern='/^\d{4}$/' required >
+    <span class="orange" ng-show="form.pwd.$error.pattern"> 验证码格式不对!</span>
+    <span class="orange" ng-show="!status" ng-bind='msg'> </span>
+  </div>
+  <button type="button" ng-click="register()" ng-disabled='!form.$valid' class="btn big" style="width:100%; margin-top:5%;">注册</button>
+</form>
+

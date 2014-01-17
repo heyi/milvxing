@@ -1,0 +1,33 @@
+<div class="header">
+  <span class="mask"></span>
+  <div class='title'>
+    <a href="#set/myOrders">
+      <i class="fa-angle-left left fa"></i>
+    </a>
+    
+    {{header}}
+  </div> 
+</div>
+
+<div class="main-content">
+  <pull-to-refresh >
+  <ul>
+    <li class='item-box' ng-click='go("/orders/{{o.order_id}}")' ng-repeat='o in orders'>
+      <h5 ng-bind="o.pro_name"></h5>
+      <table cellspacing="0" style="width:100%; ">
+        <tr>
+          <td class="orange" ng-bind='o.order_state_name' style="width:96%; font-size:1.1em;"></td>
+          <td style="width:4%; ">
+            <i class="fa-angle-right fa fs-i" ></i>
+          </td>
+        </tr>
+      </table>
+    </li>
+  </ul>
+
+  <div ng-show='warning' style="width: auto;  margin-left: 80px; margin-top: 48%; ">
+    <i class="fa-warning fa orange"></i>
+    没有您的订单!
+  </div>
+  </pull-to-refresh>
+</div>

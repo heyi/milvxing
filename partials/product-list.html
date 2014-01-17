@@ -1,0 +1,91 @@
+<div class="page {{slide}}">
+  <div class="home-header" ng-init='popover=false; '>
+    <span class="mask"></span>
+    <div class='title'>
+      <a href="#set">
+        <i class="fa fa-bars right light-blue"></i>
+      </a>
+      <div class='left logo' style="left:2%; ">
+        <img src="img/logo.png" alt="logo" style="width: 100px;display:block; margin-top:4px;
+        background-image:none;" />
+      </div>
+      <span ng-click='popover=!popover'>
+        {{head}}
+        <i class="fa-caret-down fa light-blue" ></i>
+      </span>
+      <i class="fa fa-search right light-blue" ng-click='slide="slide-left"' style="right:16%; "></i>
+    </div> 
+  </div>
+
+  <div  class="popover" ng-init='popover=false' ng-show='popover'>
+    <div class="arrow"></div>
+    <a ng-repeat='h in head_to' ng-click='queryForCity(h)'>{{h}}</a>
+  </div>
+
+  <div class="main-content" style="background:#fff; ">
+    <pull-to-refresh >
+    <ul>
+      <li class="list-item" ng-click='go("/products/{{p.pro_id}}")' ng-repeat="p in products">
+        <img ng-src='{{p.img}}' alt={{p.exlain}} />
+        <span class="discount">{{p.discount}}折</span>
+        <span ng-class="{free:p.way_type  == '自由行',group:p.way_type  == '跟团游'}" ng-bind='p.way_type'> </span>
+        <div class="tip">
+          <div class="pull-left" style="width: 42%; ">
+            <div style="display:table-cell; height:60px; width:100%; vertical-align:middle;
+              text-align:left;padding-left:5px;">
+              <b class='light-blue'>{{p.start}}－{{p.end}}</b>
+              <b class="orange">{{p.price}}元起</b>
+            </div>
+          </div>
+          <div class="pull-left" style="width:58%;">
+            <p ng-bind='p.explain'></p>
+            <!-- <p ng-bind='p.hotel'></p>-->
+          </div>
+        </div>
+      </li>
+    </ul>
+
+    <div ng-show='warning' style="width: auto;  margin-left: 10%; margin-top: 48%;">
+      <i class="fa-warning fa orange"></i>
+      未找到与 <span class='orange'> {{params.key}} {{head}} </span> 相关的产品!
+    </div>
+    
+    </pull-to-refresh>
+  </div>
+</div>
+<div class="page2 {{slide}}" ng-swipe-right='slide=""'>
+  <div class="header">
+    <span class="mask"></span>
+    <div class='title'>
+      <!-- <i class="icon-32 icon-home-32 left " ng-click='slide=""'></i>-->
+      <i class="fa fa-angle-left left" ng-click='slide=""'></i>
+      搜索
+    </div> 
+  </div>
+
+  <div class="content light-blue" style="border-bottom: 1px solid #ccc; padding:10px 5px;   ">
+    <input type="search" ng-model='params["key"]' class="form-control search" placeholder="输入目的地, 主题或者关键字">
+    <button type="button" ng-click="queryForKey()" class="btn btn-primary btn-search ">
+      <i class="fa-search fa "></i>
+    </button>
+  </div>
+
+  <div class="container" style="padding-top: 5%; ">
+    <div class="row">
+      <div class="col-xs-4">
+        <button type="button" ng-click='params["key"]="新加坡"' class="btn btn-default">新加坡</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" ng-click='params["key"]="马来西亚"' class="btn btn-default">马来西亚</button>
+      </div>
+      <div class="col-xs-4">
+        <button type="button" ng-click='params["key"]="特价机票"' class="btn btn-default">特价机票</button>
+      </div>
+    </div>
+    <div class="row" style="margin-top: 3%;">
+      <div class="col-xs-4">
+        <button type="button" ng-click='params["key"]="特价酒店"' class="btn btn-default">特价酒店</button>
+      </div>
+    </div>
+  </div>
+</div>

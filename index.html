@@ -1,0 +1,23 @@
+<!doctype html>
+<html lang="en" ng-app='app'>
+  <head>
+    <meta charset="utf-8">
+    <title ng-bind='title'> 爱旅行，专注出境旅游特价，给你一次说走就走的旅行（www.ilvxing.com） </title>
+    <link rel="stylesheet" href="dist/ilvxing.min.css" />
+    <link rel="stylesheet" href="font-awesome/css/font-awesome.min.css" />
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-itunes-app" content="app-id=" />
+    <meta name="format-detection" content="telephone=yes"/>
+
+    <script type="text/javascript" src="dist/ilvxing.min.js"></script>
+  </head>
+  <body >
+    <div class="view-animation-container" ng-view> </div>
+  </body>
+  <div id='app_loading' class="loading">
+    <div style="width: 50px;  margin:auto; margin-top: 49%; ">
+      <i class="fa fa-spinner fa-spin fa-4x light-blue" ></i>
+    </div>
+  </div>
+</html>

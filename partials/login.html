@@ -1,0 +1,30 @@
+<div class="header">
+  <span class="mask"></span>
+  <div class='title'>
+    <a href="#set">
+      <i class="fa-angle-left left fa"></i>
+    </a>
+    登陆
+  </div> 
+</div>
+
+<form style="padding:5% 5% 0% 5%; height: 190px;  " name="form" >
+  <div style="background:#fff; ">
+    <input type="text" ng-model='user.username' name="username" class="form-control big"
+    placeholder="手机/邮箱"  required >
+    <input type="password" ng-model='user.pwd' name="pwd" class="form-control big" placeholder="密码" required >
+    <span class="orange" ng-show="!status" ng-bind='msg'> </span>
+  </div>
+  <button type="button" ng-click="login()" ng-disabled='!form.$valid' class="btn  big" style="width:100%;
+    margin-top:5%;">登陆</button>
+</form>
+
+<div class="container" style="margin-top:1%; ">
+  <div class="row" style="text-align:center; ">
+    <div class="col-xs-6">
+      <a href='#/register1' class="btn btn-link">快速注册</a>
+    </div>
+    <div class="col-xs-6"></div>
+    <a href='#/findpassword1' class="btn btn-link">忘记密码</a>
+  </div>
+</div>

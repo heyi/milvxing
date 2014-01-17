@@ -1,0 +1,39 @@
+<div class="header">
+  <span class="mask"></span>
+  <div class='title'>
+    <i class="fa-angle-left left fa" my-back></i>
+    我的订单
+    <a href="#products">
+      <i class="fa-home right fa"></i>
+    </a>
+  </div> 
+</div>
+
+<form style="padding:5%" name="form" >
+  <div style="background:#fff;">
+    <table cellspacing="0" class='content' style="margin-top:10px; ">
+	 <tr>
+        <td style="width:35%; text-align:center; ">
+          手机号码：
+        </td>
+        <td style="width:65%;">
+		<input type="text" class="form-control big" ng-model="user.tel" name="tel" placeholder="请输入联系人手机号码" required ng-pattern='/^1\d{10}$/'  >
+        </td>
+      </tr>
+	<tr>
+        <td style="width:35%; text-align:center;">
+          联系人姓名：
+        </td>
+        <td style="width:65%;">
+		<input type="text" class="form-control big" ng-model="user.names" name="names" placeholder="请输入联系人姓名"  required>
+        </td>
+      </tr>
+    </table>
+  </div>
+  <div style="height:20px; ">
+    <span class="orange" ng-show="form.tel.$error.pattern">手机号格式不对!</span>
+    <span class="orange" ng-bind='msg'> </span>
+  </div>
+  <button type="button" ng-click="query()"  ng-disabled='!form.$valid' class="btn big" style="width:100%;">查询</button>
+</form>
+
